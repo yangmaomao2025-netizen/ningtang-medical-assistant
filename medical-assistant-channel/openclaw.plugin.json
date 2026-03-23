@@ -1,0 +1,43 @@
+{
+  "id": "medical-assistant",
+  "name": "宁唐医学助手",
+  "description": "宁唐医学助手 - 专业的医学问答消息通道插件",
+  "version": "0.1.0",
+  "channels": ["medical-assistant"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean",
+        "default": true
+      },
+      "port": {
+        "type": "integer",
+        "default": 8090,
+        "minimum": 1024,
+        "maximum": 65535
+      },
+      "host": {
+        "type": "string",
+        "default": "0.0.0.0"
+      },
+      "platformUrl": {
+        "type": "string",
+        "description": "机器人应用平台 URL"
+      },
+      "appId": {
+        "type": "string",
+        "description": "机器人 App ID"
+      },
+      "appSecret": {
+        "type": "string",
+        "description": "机器人 App Secret"
+      },
+      "jwtSecret": {
+        "type": "string",
+        "description": "JWT 密钥"
+      }
+    }
+  }
+}
