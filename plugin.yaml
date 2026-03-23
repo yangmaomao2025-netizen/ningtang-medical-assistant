@@ -1,0 +1,117 @@
+name: medical-assistant
+version: 0.1.0
+displayName: 宁唐医学助手
+description: OpenClaw 医学问答插件，支持多端客户端和统一后台管理
+
+requires:
+  - openclaw: ">=2.0.0"
+
+permissions:
+  - conversation:read
+  - conversation:write
+  - user:read
+  - user:write
+  - bot:manage
+  - permission:manage
+  - http:route
+  - rpc:method
+
+config:
+  # 插件元数据
+  metadata:
+    name: "宁唐医学助手"
+    version: "0.1.0"
+    author: "宁唐科技"
+    description: "基于大语言模型的智能医学问答系统"
+
+  # 模型配置
+  models:
+    minimax:
+      enabled: true
+      apiKey: ""
+      endpoint: "https://api.minimax.chat/v1"
+      model: "abab6.5-chat"
+    kimi:
+      enabled: true
+      apiKey: ""
+      endpoint: "https://api.moonshot.cn/v1"
+      model: "moonshot-v1-8k"
+    glm:
+      enabled: true
+      apiKey: ""
+      endpoint: "https://open.bigmodel.cn/api/paas/v4"
+      model: "glm-4"
+
+  defaultModel: "kimi"
+
+  # 医学问答配置
+  medical:
+    disclaimer: "以上内容仅供参考，如有疑问请咨询专业医生。本系统不替代专业医疗诊断和治疗建议。"
+    confidence:
+      high: 0.8
+      medium: 0.5
+    urgentKeywords:
+      - "胸痛"
+      - "呼吸困难"
+      - "大出血"
+      - "休克"
+      - "昏迷"
+      - "窒息"
+      - "中毒"
+      - "过敏性休克"
+      - "心梗"
+      - "中风"
+      - "心脏骤停"
+      - "窒息"
+      - "癫痫持续"
+
+  # SSO 配置
+  sso:
+    enabled: false
+    providers:
+      oauth:
+        enabled: false
+        providers: []
+      saml:
+        enabled: false
+        providers: []
+      ldap:
+        enabled: false
+        servers: []
+
+  # 数据库配置
+  database:
+    type: "mongodb"
+    uri: "${MONGODB_URI:localhost:27017/medical_assistant}"
+    encryption:
+      enabled: true
+      key: "${ENCRYPTION_KEY:}"
+
+  # Redis 配置
+  redis:
+    enabled: true
+    host: "${REDIS_HOST:localhost}"
+    port: ${REDIS_PORT:6379}
+    password: "${REDIS_PASSWORD:}"
+    db: ${REDIS_DB:0}
+
+  # 管理后台配置
+  admin:
+    enabled: true
+    basePath: "/admin"
+    sessionTimeout: 3600
+
+  # API 配置
+  api:
+    basePath: "/api/v1"
+    rateLimit:
+      enabled: true
+      requestsPerMinute: 60
+    cors:
+      enabled: true
+      origins: ["*"]
+
+  # 日志配置
+  logging:
+    level: "info"
+    auditLogEnabled: true
